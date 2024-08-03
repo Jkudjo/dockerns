@@ -20,8 +20,8 @@
 
 1. **Clone the Repository** (if applicable):
    ```sh
-   git clone https://github.com/yourusername/your-repo.git
-   cd your-repo
+   git clone https://github.com/Jkudjo/dockerns
+   cd dockerns
 
 Save the Script: Save the dockerns.py script to your desired location.
 
