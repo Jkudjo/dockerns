@@ -24,52 +24,23 @@
    cd your-repo
 
 Save the Script: Save the dockerns.py script to your desired location.
-Usage
+
+**Usage**
 Make the Script Executable (optional):
 
 
 chmod +x dockerns.py
-Run the Script:
+**Run the Script:**
 
 python dockerns.py
 The script will list all Docker images.
+
 You will be prompted to select an image by entering the corresponding number.
 The script will then run a container from the selected image and open a shell (/bin/sh) inside it.
-Managing Git Remotes
-Viewing Remote URLs
-To view the configured remote URLs for your Git repository:
 
-git remote -v
-This command will show you the fetch and push URLs for each remote. For example:
 
-origin    https://github.com/Jkudjo/dockerns.git (fetch)
-origin    https://github.com/Jkudjo/dockerns.git (push)
-Adding Additional Remotes
-To add a new remote, such as a Bitbucket remote:
 
-git remote add bitbucket https://bitbucket.org/username/repository.git
-Replace username with your Bitbucket username and repository with the name of your Bitbucket repository.
 
-Updating Remote URLs
-To update an existing remote URL:
-
-git remote set-url origin https://new-url-for-your-repo.git
-Replace origin with the name of the remote you want to update and https://new-url-for-your-repo.git with the new URL.
-
-Pulling from and Pushing to Specific Remotes
-Pull from GitHub:
-
-git pull origin main
-Pull from Bitbucket:
-
-git pull bitbucket main
-Push to GitHub:
-
-git push origin main
-Push to Bitbucket:
-
-git push bitbucket main
-Replace main with the branch name you are working with if it is different.
 
 Example
 $ python dockerns.py
