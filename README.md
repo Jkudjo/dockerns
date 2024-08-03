@@ -39,9 +39,6 @@ You will be prompted to select an image by entering the corresponding number.
 The script will then run a container from the selected image and open a shell (/bin/sh) inside it.
 
 
-
-
-
 Example
 $ python dockerns.py
 Listing images...
@@ -51,6 +48,8 @@ Listing images...
 Select an image by number: 2
 Selected image: nginx:latest
 Running container from image: nginx:latest
+
+
 Troubleshooting
 Docker Not Running: Ensure Docker is running and you have the necessary permissions.
 Permission Denied: Make sure you have sudo privileges to run Docker commands.
