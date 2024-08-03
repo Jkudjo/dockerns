@@ -45,16 +45,20 @@ Listing images...
 1. ubuntu:latest 1234567890ab
 2. nginx:latest 234567890abc
 3. mysql:5.7 34567890abcd
+   
 Select an image by number: 2
 Selected image: nginx:latest
 Running container from image: nginx:latest
 
 
-Troubleshooting
+**Troubleshooting**
 Docker Not Running: Ensure Docker is running and you have the necessary permissions.
+
 Permission Denied: Make sure you have sudo privileges to run Docker commands.
+
 Invalid Input: Ensure you enter a valid number when selecting an image.
-License
+
+**License**
 This script is licensed under the MIT License.
 
 Contributing
