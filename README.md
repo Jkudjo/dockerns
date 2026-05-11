@@ -1,65 +1,90 @@
-# DockerNS - Docker Image Selector and Runner
+# DockerNS
 
-## Overview
+DockerNS is a small Python CLI that lists local Docker images, lets you choose
+one interactively, and opens `/bin/sh` in a temporary container.
 
-`dockerns.py` is a Python script that allows you to list all Docker images on your system, select one, and then run a container from the selected image. The script provides a simple command-line interface for managing Docker images and containers.
+## Current behavior
 
-## Features
+By default, DockerNS runs Docker through `sudo`:
 
-- **List Docker Images**: Displays all Docker images with their repository, tag, and ID.
-- **Select Docker Image**: Prompts the user to select an image by number.
-- **Run Container**: Starts a container from the selected image and opens a shell (`/bin/sh`) inside it.
+- `sudo docker images --format '{{.Repository}}:{{.Tag}} {{.ID}}'`
+- `sudo docker run -it --rm <image> /bin/sh`
 
-## Prerequisites
+That preserves the original behavior of this project. If your environment uses
+the Docker group or rootless Docker, review `dockerns.py` before changing this
+default because Docker socket access is effectively host-level privilege.
 
-- Python 3.x
-- Docker installed and configured
-- `sudo` privileges for running Docker commands
+## Requirements
+
+- Python 3.9 or newer
+- Docker installed and running
+- Permission to run Docker commands with `sudo`
 
 ## Installation
 
-1. **Clone the Repository** (if applicable):
-   ```sh
-   git clone https://github.com/Jkudjo/dockerns
-   cd dockerns
+For local development:
 
-Save the Script: Save the dockerns.py script to your desired location.
+```sh
+python -m pip install -e .
+```
 
-**Usage**
-Make the Script Executable (optional):
+After installation, run:
 
+```sh
+dockerns
+```
 
-chmod +x dockerns.py
-**Run the Script:**
+You can also run the module directly without installing it:
 
+```sh
 python dockerns.py
-The script will list all Docker images.
+```
 
-You will be prompted to select an image by entering the corresponding number.
-The script will then run a container from the selected image and open a shell (/bin/sh) inside it.
+## Usage
 
-
-Example
-$ python dockerns.py
+```text
+$ dockerns
 Listing images...
 1. ubuntu:latest 1234567890ab
 2. nginx:latest 234567890abc
 3. mysql:5.7 34567890abcd
-   
 Select an image by number: 2
-Selected image: nginx:latest
+Selected image: nginx:latest 234567890abc
 Running container from image: nginx:latest
+```
 
+The selected container is removed automatically after the shell exits because
+DockerNS uses `docker run --rm`.
 
-**Troubleshooting**
-Docker Not Running: Ensure Docker is running and you have the necessary permissions.
+## Development
 
-Permission Denied: Make sure you have sudo privileges to run Docker commands.
+Run the unit tests:
 
-Invalid Input: Ensure you enter a valid number when selecting an image.
+```sh
+python -m unittest discover -s tests
+```
 
-**License**
-This script is licensed under the MIT License.
+Compile-check the Python sources:
 
-Contributing
-Feel free to submit issues and pull requests. For major changes, please open an issue first to discuss what you would like to change.
+```sh
+python -m compileall dockerns.py tests
+```
+
+The CI workflow runs both checks across supported Python versions.
+
+## Troubleshooting
+
+- **Docker is not running**: start Docker and rerun `dockerns`.
+- **Permission denied**: confirm your user can run `sudo docker images`.
+- **No images listed**: pull or build an image first, then rerun DockerNS.
+- **Invalid input**: enter the number printed next to the target image.
+
+## License
+
+DockerNS is licensed under the MIT License. See [LICENSE](LICENSE).
+
+## Contributing
+
+Keep changes small and covered by tests where behavior changes. For larger
+changes, open an issue first to discuss the intended behavior and operational
+impact.
